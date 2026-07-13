@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Titanic Survival Predictor</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold text-primary" href="#">
+
+            🚢 Titanic Predictor
+
+        </a>
+
+        <div>
+
+            <a href="#about" class="btn btn-outline-primary me-2">
+
+                About
+
+            </a>
+
+            <a href="https://github.com/" target="_blank" class="btn btn-primary">
+
+                <i class="bi bi-github"></i>
+
+                GitHub
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h1 class="display-4 fw-bold">
+
+                    Titanic Survival Predictor
+
+                </h1>
+
+                <p class="lead mt-3">
+
+                    Predict whether a passenger would have survived the Titanic disaster using a Machine Learning model trained on the Kaggle Titanic Dataset.
+
+                </p>
+
+                <div class="mt-4">
+
+                    <span class="badge bg-primary p-3">
+
+                        Logistic Regression Model
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 text-center">
+
+                <img src="https://images.unsplash.com/photo-1565035010268-a3816f98589a?w=700"
+                     class="img-fluid rounded-4 shadow">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Prediction Form ================= -->
+
+<section class="prediction-section py-5">
+
+<div class="container">
+
+<div class="card shadow-lg border-0 rounded-4">
+
+<div class="card-body p-5">
+
+<h2 class="text-center mb-5">
+
+Passenger Information
+
+</h2>
+
+<form action="/predict" method="POST">
+
+<div class="row">
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+Passenger Class
+
+</label>
+
+<select class="form-select" name="Pclass">
+
+<option value="1">First Class</option>
+
+<option value="2">Second Class</option>
+
+<option value="3">Third Class</option>
+
+</select>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+Gender
+
+</label>
+
+<select class="form-select" name="Sex">
+
+<option value="male">Male</option>
+
+<option value="female">Female</option>
+
+</select>
+
+</div>
+<div class="col-md-6 mb-4">
+
+    <label class="form-label">
+        Age
+    </label>
+
+    <input type="number"
+           class="form-control"
+           name="Age"
+           placeholder="Enter Age"
+           required>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+    <label class="form-label">
+        Fare
+    </label>
+
+    <input type="number"
+           step="0.01"
+           class="form-control"
+           name="Fare"
+           placeholder="Enter Fare"
+           required>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+    <label class="form-label">
+        Siblings / Spouses
+    </label>
+
+    <input type="number"
+           class="form-control"
+           name="SibSp"
+           value="0">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+    <label class="form-label">
+        Parents / Children
+    </label>
+
+    <input type="number"
+           class="form-control"
+           name="Parch"
+           value="0">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+    <label class="form-label">
+        Embarked
+    </label>
+
+    <select class="form-select" name="Embarked">
+
+        <option value="S">Southampton</option>
+        <option value="C">Cherbourg</option>
+        <option value="Q">Queenstown</option>
+
+    </select>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+    <label class="form-label">
+        Title
+    </label>
+
+    <select class="form-select" name="Title">
+
+        <option value="Mr">Mr</option>
+        <option value="Mrs">Mrs</option>
+        <option value="Miss">Miss</option>
+        <option value="Master">Master</option>
+        <option value="Rare">Rare</option>
+
+    </select>
+
+</div>
+
+<div class="col-md-12 mb-4">
+
+    <label class="form-label">
+        Cabin Available
+    </label>
+
+    <select class="form-select" name="HasCabin">
+
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+
+    </select>
+
+</div>
+
+</div>
+
+<div class="text-center mt-4">
+
+    <button type="submit" class="btn btn-primary btn-lg px-5">
+
+        <i class="bi bi-stars"></i>
+
+        Predict Survival
+
+    </button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= Prediction Result ================= -->
+
+{% if prediction %}
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="card shadow-lg border-0 rounded-4">
+
+<div class="card-body text-center p-5">
+
+<h2 class="mb-4">
+
+Prediction Result
+
+</h2>
+
+{% if prediction == "Likely to Survive" %}
+
+<div class="alert alert-success">
+
+<h3>
+
+🎉 {{ prediction }}
+
+</h3>
+
+<p class="mt-3">
+
+Survival Probability
+
+</p>
+
+<h1>
+
+{{ probability }}%
+
+</h1>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-danger">
+
+<h3>
+
+💀 {{ prediction }}
+
+</h3>
+
+<p class="mt-3">
+
+Survival Probability
+
+</p>
+
+<h1>
+
+{{ probability }}%
+
+</h1>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endif %}
+<!-- ================= About Section ================= -->
+
+<section id="about" class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h2 class="fw-bold mb-4">
+
+                    About This Project
+
+                </h2>
+
+                <p class="text-muted">
+
+                    Titanic Survival Predictor is a Machine Learning web application
+                    developed using Flask and Scikit-Learn. The model predicts whether
+                    a passenger would have survived based on details like age, gender,
+                    passenger class, fare, family size, cabin availability and more.
+
+                </p>
+
+                <p class="text-muted">
+
+                    This project demonstrates Machine Learning model deployment,
+                    Feature Engineering, Flask Backend, HTML, CSS, Bootstrap and
+                    Responsive Web Design.
+
+                </p>
+
+                <div class="mt-4">
+
+                    <span class="badge bg-primary p-2 me-2">
+                        Flask
+                    </span>
+
+                    <span class="badge bg-success p-2 me-2">
+                        Scikit-Learn
+                    </span>
+
+                    <span class="badge bg-dark p-2 me-2">
+                        Bootstrap
+                    </span>
+
+                    <span class="badge bg-warning text-dark p-2">
+                        Machine Learning
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 text-center">
+
+                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=700"
+                     class="img-fluid rounded-4 shadow">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Footer ================= -->
+
+<footer class="bg-dark text-white py-4">
+
+    <div class="container text-center">
+
+        <h5 class="mb-3">
+
+            Titanic Survival Predictor
+
+        </h5>
+
+        <p class="mb-2">
+
+            Built using Flask • Scikit-Learn • Bootstrap • Machine Learning
+
+        </p>
+
+        <p class="text-secondary">
+
+            © 2026 Deeva Jain | All Rights Reserved
+
+        </p>
+
+    </div>
+
+</footer>
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
